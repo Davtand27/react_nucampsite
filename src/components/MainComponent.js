@@ -10,6 +10,7 @@ import { COMMENTS } from '../shared/comments';
 import { PARTNERS } from '../shared/partners';
 import { PROMOTIONS } from '../shared/promotions';
 import { CAMPSITES } from '../shared/campsites';
+import About from './AboutComponent';
 
 class Main extends Component {
 
@@ -46,6 +47,14 @@ class Main extends Component {
             );
         };  
 
+        // const About = () => {
+        //     return (
+        //         <About 
+        //             partner={this.state.partners.filter(partner => partner.featured)[0]} 
+        //         />
+        //     );
+        // }
+
         return (
             <div>
                 <Header />
@@ -53,6 +62,7 @@ class Main extends Component {
                     <Route path='/home' component={HomePage} />
                     <Route exact path='/directory' render={() => <Directory campsites={this.state.campsites} />} />
                     <Route path='/directory/:campsiteId' component={CampsiteWithId} />
+                    <Route path='/aboutus' render={() => <About partners={this.state.partners} />} />
                     <Route exact path='/contactus' component={Contact} />
                     <Redirect to='/home' />
                 </Switch>
