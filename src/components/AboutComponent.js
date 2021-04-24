@@ -14,10 +14,7 @@ function RenderPartner({partner}) {
                 </Media>
             </>
         )
-        return (
-            <></>
-        )
-    }
+    };
 }
 
 function About(props) {
