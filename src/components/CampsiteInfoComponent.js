@@ -22,7 +22,7 @@ function RenderCampsite({campsite}) {
     );
 }
 
-function RenderComments({comments, addComment, campsiteId}) {
+function RenderComments({comments, postComment, campsiteId}) {
     if (comments) {
         return (
             <div className="col-md-5 m-1">
@@ -39,7 +39,7 @@ function RenderComments({comments, addComment, campsiteId}) {
                         );
                     })
                 }
-                <CommentForm campsiteId={campsiteId} addComment={addComment} />
+                <CommentForm campsiteId={campsiteId} postComment={postComment} />
             </div>
         );
     }
@@ -61,7 +61,7 @@ class CommentForm extends Component {
     }
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
+        this.props.postComment(this.props.campsiteId, values.rating, values.author, values.text);
     }
     render() {
         return (
@@ -145,8 +145,29 @@ function CampsiteInfo(props) {
         );
     }
     if (props.campsite) {
-    return <div />;
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/directory">Directory</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.campsite.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <h2>{props.campsite.name}</h2>
+                        <hr />
+                    </div>
+                </div>
+                <div className="row">
+                    <RenderCampsite campsite={props.campsite} />
+                    <RenderComments 
+                        comments={props.comments}
+                        postComment={props.postComment}      
+                        campsiteId={props.campsite.id}
+                    />
+                </div>
+            </div>
+        );
     }
+    return <div />;
 }
-
 export default CampsiteInfo;
